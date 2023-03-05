@@ -7,7 +7,7 @@ const app = express();
 
 const adminRouter = require('./adminRoute').Router
 const bodyParser = require('body-parser');
-const port = process.env.PORT || 143;
+const port = process.env.PORT || 1234;
 const http = require("http");
 const { Server } = require("socket.io");
 app.engine('html', require('ejs').renderFile);
@@ -64,7 +64,7 @@ io.on("connection", (socket) => {
     });
 });
 
-server.listen(1433, "0.0.0.0")
+server.listen(1233, "0.0.0.0")
 
 app.listen(port, () => {
     console.log('app listening on port:', port);
