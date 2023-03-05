@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 
-mongoose.connect('mongodb://127.0.0.1:27017/bookBackend', {
+mongoose.connect('mongodb+srv://adityav:anaya@cluster0.r6f8ysb.mongodb.net/?retryWrites=true&w=majority', {
     useUnifiedTopology: true
 }).then(() => {
     console.log("Connection is set.")
