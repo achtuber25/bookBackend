@@ -64,7 +64,7 @@ io.on("connection", (socket) => {
     });
 });
 
-server.listen(1233, "0.0.0.0")
+server.listen(143, "0.0.0.0")
 
 app.listen(port, () => {
     console.log('app listening on port:', port);
