@@ -4,6 +4,8 @@ require('./server');
 
 var cors = require("cors");
 // const path = require('path');
+const app = express();
+
 const adminRouter = require('./adminRoute').Router
 const bodyParser = require('body-parser');
 const port = process.env.PORT || 3000;
@@ -11,7 +13,6 @@ const port = process.env.PORT || 3000;
 
 
 
-const app = express();
 app.engine('html', require('ejs').renderFile);
 app.use(bodyParser.json({
     limit: '50mb'
