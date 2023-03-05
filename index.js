@@ -1,6 +1,5 @@
 const express = require('express');
 require('./conn');
-require('./server');
 
 var cors = require("cors");
 // const path = require('path');
@@ -9,10 +8,8 @@ const app = express();
 const adminRouter = require('./adminRoute').Router
 const bodyParser = require('body-parser');
 const port = process.env.PORT || 143;
-
-
-
-
+const http = require("http");
+const { Server } = require("socket.io");
 app.engine('html', require('ejs').renderFile);
 app.use(bodyParser.json({
     limit: '50mb'
@@ -47,7 +44,27 @@ app.use('/admin', adminRouter)
 
 // });
 
+const server = http.createServer(app);
 
+const io = new Server(server, {
+    cors: {
+        origin: "*"
+    },
+});
+
+io.on("connection", (socket) => {
+    console.log(`User Connected: ${socket.id}`);
+
+    socket.on("join_room", (data) => {
+        socket.join(data);
+    });
+
+    socket.on("send_message", (data) => {
+        socket.to(data.room).emit("receive_message", data);
+    });
+});
+
+server.listen(1433, "0.0.0.0")
 
 app.listen(port, () => {
     console.log('app listening on port:', port);
